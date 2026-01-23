@@ -3,1087 +3,505 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jindal Steel</title>
+  <title>Siddhartha Singh - Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/_sdk/element_sdk.js"></script>
-  <script src="/_sdk/data_sdk.js"></script>
-  <script type="module">
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js';
-        import { getDatabase, ref, push, set } from 'https://www.gstatic.com/firebasejs/10.0.0/firebase-database.js';
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDTPCM7Sos33AT3MRnbfCZxA2OVAsS3Apw",
-            authDomain: "recycling-fe74a.firebaseapp.com",
-            databaseURL: "https://recycling-fe74a-default-rtdb.firebaseio.com",
-            projectId: "recycling-fe74a",
-            storageBucket: "recycling-fe74a.firebasestorage.app",
-            messagingSenderId: "357463945377",
-            appId: "1:357463945377:web:df2b84ac44c91301c7c0e0"
-        };
-
-        // Initialize Firebase
-        const firebaseApp = initializeApp(firebaseConfig);
-        const firebaseDatabase = getDatabase(firebaseApp);
-        window.firebaseDb = firebaseDatabase;
-        window.firebaseRef = ref;
-        window.firebasePush = push;
-        window.firebaseSet = set;
-    </script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
-        body {
-            box-sizing: border-box;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-            width: 100%;
-        }
-
-        .app-wrapper {
-            height: 100%;
-            width: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        :root {
-            --primary-bg: #0a0a0f;
-            --surface: #1a1a24;
-            --text: #f5f5f7;
-            --accent-primary: #e85a2c;
-            --accent-secondary: #ff8c5a;
-        }
-
-        /* Custom Scrollbar */
-        .app-wrapper::-webkit-scrollbar {
-            width: 8px;
-        }
-        .app-wrapper::-webkit-scrollbar-track {
-            background: var(--primary-bg);
-        }
-        .app-wrapper::-webkit-scrollbar-thumb {
-            background: var(--accent-primary);
-            border-radius: 4px;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(232, 90, 44, 0.3); }
-            50% { box-shadow: 0 0 40px rgba(232, 90, 44, 0.6); }
-        }
-
-        @keyframes rotate-slow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes spark {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-
-        .animate-fade-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .animate-fade-left {
-            animation: fadeInLeft 0.8s ease-out forwards;
-        }
-
-        .animate-fade-right {
-            animation: fadeInRight 0.8s ease-out forwards;
-        }
-
-        .animate-scale {
-            animation: scaleIn 0.6s ease-out forwards;
-        }
-
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .animate-pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        .delay-600 { animation-delay: 0.6s; }
-
-        /* Hero Background Pattern */
-        .hero-pattern {
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(232, 90, 44, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 140, 90, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 40% 80%, rgba(232, 90, 44, 0.08) 0%, transparent 40%);
-        }
-
-        /* Steel Grid Pattern */
-        .steel-grid {
-            background-image: 
-                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-
-        /* Glowing Text */
-        .glow-text {
-            text-shadow: 0 0 40px rgba(232, 90, 44, 0.5);
-        }
-
-        /* Gradient Text */
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        /* Button Styles */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(232, 90, 44, 0.4);
-        }
-
-        .btn-secondary {
-            border: 2px solid var(--accent-primary);
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: var(--accent-primary);
-            transform: translateY(-2px);
-        }
-
-        /* Card Styles */
-        .card {
-            background: linear-gradient(145deg, rgba(26, 26, 36, 0.8), rgba(26, 26, 36, 0.4));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(232, 90, 44, 0.2);
-            transition: all 0.4s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-primary);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(232, 90, 44, 0.2);
-        }
-
-        /* Navigation */
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link:hover {
-            color: var(--accent-primary);
-        }
-
-        /* Input Styles */
-        .input-field {
-            background: rgba(26, 26, 36, 0.6);
-            border: 1px solid rgba(232, 90, 44, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .input-field:focus {
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 20px rgba(232, 90, 44, 0.2);
-            outline: none;
-        }
-
-        /* Stats Counter */
-        .stat-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-        }
-
-        /* Section Divider */
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(232, 90, 44, 0.5), transparent);
-        }
-
-        /* Floating Elements */
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(232, 90, 44, 0.3), rgba(255, 140, 90, 0.1));
-            filter: blur(40px);
-        }
-
-        /* Icon Container */
-        .icon-container {
-            background: linear-gradient(135deg, rgba(232, 90, 44, 0.2), rgba(232, 90, 44, 0.05));
-            border: 1px solid rgba(232, 90, 44, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover .icon-container {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        /* Toast Notification */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 16px 24px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            font-weight: 500;
-            transform: translateX(400px);
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 1000;
-        }
-
-        .toast.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-
-        .toast.error {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: rotate-slow 0.8s linear infinite;
-        }
-
-        /* Smooth scroll behavior */
-        .app-wrapper {
-            scroll-behavior: smooth;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
-    </style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+    
+    .fade-in {
+      animation: fadeIn 1s ease-out forwards;
+    }
+    
+    .slide-in-left {
+      animation: slideInLeft 0.8s ease-out forwards;
+    }
+    
+    .delay-100 { animation-delay: 0.1s; opacity: 0; }
+    .delay-200 { animation-delay: 0.2s; opacity: 0; }
+    .delay-300 { animation-delay: 0.3s; opacity: 0; }
+    .delay-400 { animation-delay: 0.4s; opacity: 0; }
+    .delay-500 { animation-delay: 0.5s; opacity: 0; }
+    
+    .skill-tag {
+      transition: all 0.3s ease;
+    }
+    
+    .skill-tag:hover {
+      transform: translateY(-2px);
+    }
+    
+    .project-card {
+      transition: all 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-8px);
+    }
+    
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    .section-title {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      border-radius: 2px;
+    }
+  </style>
   <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
- <body class="h-full" style="background: var(--primary-bg); color: var(--text); font-family: 'Montserrat', sans-serif;">
-  <div class="app-wrapper" id="app-wrapper"><!-- Navigation -->
-   <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300" id="navbar" style="background: transparent;">
-    <div class="max-w-7xl mx-auto flex items-center justify-between"><!-- Logo -->
-     <div class="flex items-center gap-3 animate-fade-left">
-      <div class="w-12 h-12 rounded-lg flex items-center justify-center animate-pulse-glow" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-       <svg viewbox="0 0 24 24" class="w-7 h-7" fill="white"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z" />
-       </svg>
-      </div>
-      <div><span class="text-xl font-bold tracking-wide" style="font-family: 'Playfair Display', serif;">JINDAL</span> <span class="text-xl font-light ml-1">STEEL</span>
-      </div>
-     </div><!-- Desktop Navigation -->
-     <div class="hidden md:flex items-center gap-8"><a href="#home" class="nav-link text-sm font-medium tracking-wide">HOME</a> <a href="#about" class="nav-link text-sm font-medium tracking-wide">ABOUT</a> <a href="#services" class="nav-link text-sm font-medium tracking-wide">SERVICES</a> <a href="#stats" class="nav-link text-sm font-medium tracking-wide">ACHIEVEMENTS</a> <a href="#register" class="nav-link text-sm font-medium tracking-wide">LOGIN</a> <a href="#contact" class="nav-link text-sm font-medium tracking-wide">CONTACT</a>
-     </div><!-- Mobile Menu Button --> <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg" style="background: rgba(232, 90, 44, 0.2);">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-      </svg></button>
-    </div>
-   </nav><!-- Mobile Menu -->
-   <div id="mobile-menu" class="mobile-menu fixed inset-0 z-40 md:hidden" style="background: var(--primary-bg);">
-    <div class="flex flex-col items-center justify-center h-full gap-8"><a href="#home" class="text-2xl font-medium nav-link mobile-nav-link">HOME</a> <a href="#about" class="text-2xl font-medium nav-link mobile-nav-link">ABOUT</a> <a href="#services" class="text-2xl font-medium nav-link mobile-nav-link">SERVICES</a> <a href="#stats" class="text-2xl font-medium nav-link mobile-nav-link">ACHIEVEMENTS</a> <a href="#register" class="text-2xl font-medium nav-link mobile-nav-link">REGISTER</a> <a href="#contact" class="text-2xl font-medium nav-link mobile-nav-link">CONTACT</a>
-    </div>
-   </div><!-- Hero Section -->
-   <section id="home" class="relative min-h-screen flex items-center hero-pattern steel-grid overflow-hidden"><!-- Floating Shapes -->
-    <div class="floating-shape w-96 h-96 -top-48 -right-48 animate-float"></div>
-    <div class="floating-shape w-64 h-64 bottom-20 -left-32 animate-float delay-300"></div>
-    <div class="max-w-7xl mx-auto px-6 py-32 relative z-10">
-     <div class="grid lg:grid-cols-2 gap-12 items-center">
-      <div class="space-y-8">
-       <div class="animate-fade-up opacity-0"><span class="inline-block px-4 py-2 rounded-full text-sm font-medium mb-6" style="background: rgba(232, 90, 44, 0.2); border: 1px solid rgba(232, 90, 44, 0.4);"> 🏭 India's Leading Steel Producer </span>
-       </div>
-       <h1 id="hero-title" class="text-5xl md:text-7xl font-bold leading-tight animate-fade-up opacity-0 delay-100" style="font-family: 'Playfair Display', serif;">Forging the <span class="gradient-text glow-text">Future</span> of Steel</h1>
-       <p id="hero-subtitle" class="text-xl text-gray-400 leading-relaxed animate-fade-up opacity-0 delay-200 max-w-xl">One of India's leading integrated steel producers, operating under the O.P. Jindal Group with significant operations across India and Africa.</p>
-       <div class="flex flex-wrap gap-4 animate-fade-up opacity-0 delay-300"><a href="#contact" class="btn-primary px-8 py-4 rounded-xl font-semibold text-white inline-flex items-center gap-2"> Get Started 
-         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-         </svg></a> <a href="#about" class="btn-secondary px-8 py-4 rounded-xl font-semibold inline-flex items-center gap-2" style="color: var(--accent-primary);"> Learn More </a>
-       </div>
-      </div><!-- Hero Visual -->
-      <div class="relative animate-scale opacity-0 delay-400 hidden lg:block">
-       <div class="relative w-full aspect-square max-w-lg mx-auto"><!-- Main Circle -->
-        <div class="absolute inset-0 rounded-full animate-pulse-glow" style="background: linear-gradient(135deg, rgba(232, 90, 44, 0.3), rgba(255, 140, 90, 0.1)); border: 2px solid rgba(232, 90, 44, 0.4);"></div><!-- Inner Circle -->
-        <div class="absolute inset-12 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--surface), var(--primary-bg)); border: 1px solid rgba(232, 90, 44, 0.3);">
-         <svg viewbox="0 0 100 100" class="w-48 h-48 animate-float"><!-- Steel Beam Icon --> <defs>
-           <lineargradient id="steelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#e85a2c" />
-            <stop offset="100%" style="stop-color:#ff8c5a" />
-           </lineargradient>
-          </defs> <path fill="url(#steelGrad)" d="M20 30 L50 15 L80 30 L80 70 L50 85 L20 70 Z M50 15 L50 85 M20 30 L80 70 M80 30 L20 70" /> <path fill="none" stroke="url(#steelGrad)" stroke-width="3" d="M50 15 L50 85 M25 32 L75 68 M75 32 L25 68" />
-         </svg>
-        </div><!-- Orbiting Elements -->
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));"><span class="text-2xl">⚡</span>
-        </div>
-        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center" style="background: var(--surface); border: 2px solid var(--accent-primary);"><span class="text-xl">🔧</span>
-        </div>
-        <div class="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full flex items-center justify-center" style="background: var(--surface); border: 2px solid var(--accent-primary);"><span class="text-lg">🏗️</span>
-        </div>
-        <div class="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));"><span class="text-xl">🌍</span>
-        </div>
-       </div>
+ <body class="h-full">
+  <div id="app-container" class="w-full h-full overflow-auto"><!-- Navigation -->
+   <nav id="navbar" class="sticky top-0 z-50 backdrop-blur-md border-b">
+    <div class="max-w-6xl mx-auto px-6 py-4">
+     <div class="flex justify-between items-center">
+      <h1 id="nav-name" class="text-2xl font-bold"></h1>
+      <div class="flex gap-6"><a href="#about" class="nav-link font-medium">About</a> <a href="#skills" class="nav-link font-medium">Skills</a> <a href="#projects" class="nav-link font-medium">Projects</a> <a href="#achievements" class="nav-link font-medium">Achievements</a> <a href="#contact" class="nav-link font-medium">Contact</a>
       </div>
      </div>
-    </div><!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-     <div class="w-6 h-10 rounded-full border-2 flex justify-center pt-2" style="border-color: var(--accent-primary);">
-      <div class="w-1 h-3 rounded-full" style="background: var(--accent-primary);"></div>
-     </div>
     </div>
-   </section><!-- About Section -->
-   <section id="about" class="py-24 relative">
-    <div class="section-divider"></div>
-    <div class="max-w-7xl mx-auto px-6 py-16">
-     <div class="grid lg:grid-cols-2 gap-16 items-center">
-      <div class="space-y-6"><span class="inline-block px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(232, 90, 44, 0.2); color: var(--accent-primary);"> About Us </span>
-       <h2 id="about-title" class="text-4xl md:text-5xl font-bold" style="font-family: 'Playfair Display', serif;">Building India's <span class="gradient-text">Industrial Future</span></h2>
-       <p class="text-gray-400 text-lg leading-relaxed">Jindal Steel Ltd. (officially since July 2025) is one of India's leading integrated steel producers, operating under the prestigious O.P. Jindal Group. Headquartered in New Delhi, we are a major global player in steel, mining, and infrastructure.</p>
-       <p class="text-gray-400 text-lg leading-relaxed">With significant operations across India and Africa, we continue to drive innovation in steel manufacturing while maintaining our commitment to sustainability and excellence.</p>
-       <div class="grid grid-cols-2 gap-6 pt-6">
-        <div class="space-y-2">
-         <div class="text-3xl font-bold gradient-text">
-          50+
-         </div>
-         <div class="text-gray-400">
-          Years of Excellence
-         </div>
-        </div>
-        <div class="space-y-2">
-         <div class="text-3xl font-bold gradient-text">
-          10+
-         </div>
-         <div class="text-gray-400">
-          Countries Served
-         </div>
-        </div>
-       </div>
-      </div><!-- About Visual -->
+   </nav><!-- Hero Section -->
+   <section id="hero" class="min-h-screen flex items-center justify-center px-6 py-20">
+    <div class="max-w-6xl w-full grid md:grid-cols-2 gap-12 items-center">
+     <div class="fade-in-up">
+      <p id="hero-greeting" class="text-lg mb-2 opacity-80">Hello, I'm</p>
+      <h1 id="hero-name" class="text-5xl md:text-6xl font-bold mb-4"></h1>
+      <p id="hero-tagline" class="text-2xl mb-6 opacity-90"></p>
+      <p id="hero-description" class="text-lg mb-8 opacity-80 leading-relaxed"></p>
+      <div class="flex gap-4"><a id="hero-linkedin-btn" href="" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg font-medium transition-all">LinkedIn</a> <a id="hero-github-btn" href="" target="_blank" rel="noopener noreferrer" class="px-6 py-3 rounded-lg font-medium transition-all border-2">GitHub</a>
+      </div>
+     </div>
+     <div class="fade-in-up delay-200 flex justify-center">
       <div class="relative">
-       <div class="card rounded-3xl p-8 space-y-6">
-        <div class="flex items-center gap-4">
-         <div class="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
-          <svg class="w-8 h-8" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg>
-         </div>
-         <div>
-          <h3 class="text-xl font-semibold">Our Vision</h3>
-          <p class="text-gray-400">To be the global leader in steel</p>
-         </div>
+       <div id="profile-glow" class="absolute inset-0 blur-3xl opacity-50 rounded-full"></div><img id="profile-image" src="https://i.ibb.co/tMY2TyWV/Screenshot-2025-09-25-at-4-44-26-PM.png" alt="Siddhartha Singh" class="relative rounded-full w-80 h-80 object-cover border-4 shadow-2xl">
+      </div>
+     </div>
+    </div>
+   </section><!-- Education Section -->
+   <section id="education" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="section-title text-4xl font-bold mb-12 text-center">Education</h2>
+     <div id="education-card" class="rounded-2xl p-8 shadow-lg slide-in-left">
+      <div class="flex justify-between items-start mb-4">
+       <div>
+        <h3 class="text-2xl font-bold mb-2">Bachelor of Technology in Computer Science</h3>
+        <p class="text-lg mb-2">Pranveer Singh Institute of Technology Kanpur</p>
+        <p class="opacity-75">Kanpur, Uttar Pradesh</p>
+       </div>
+       <div class="text-right">
+        <p class="font-semibold">Sep 2024 – Jul 2028</p>
+        <p class="mt-2">Grade: 8.09 (latest)</p>
+        <p class="opacity-75">7.84 (overall)</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Skills Section -->
+   <section id="skills" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="section-title text-4xl font-bold mb-12 text-center">Skills &amp; Technologies</h2>
+     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="fade-in-up delay-100">
+       <h3 class="text-xl font-bold mb-4">Languages</h3>
+       <div class="flex flex-wrap gap-2"><span class="skill-tag px-4 py-2 rounded-full font-medium">C</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">C++</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">JavaScript</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Python</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">HTML</span>
+       </div>
+      </div>
+      <div class="fade-in-up delay-200">
+       <h3 class="text-xl font-bold mb-4">Frameworks &amp; Libraries</h3>
+       <div class="flex flex-wrap gap-2"><span class="skill-tag px-4 py-2 rounded-full font-medium">React.js</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Node.js</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Express.js</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Socket.IO</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Tailwind CSS</span>
+       </div>
+      </div>
+      <div class="fade-in-up delay-300">
+       <h3 class="text-xl font-bold mb-4">Databases &amp; Tools</h3>
+       <div class="flex flex-wrap gap-2"><span class="skill-tag px-4 py-2 rounded-full font-medium">MongoDB</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">MySQL</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Firebase</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Git</span> <span class="skill-tag px-4 py-2 rounded-full font-medium">Docker</span>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section><!-- Projects Section -->
+   <section id="projects" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="section-title text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+     <div class="grid md:grid-cols-2 gap-8">
+      <div class="project-card rounded-2xl p-8 shadow-lg fade-in-up delay-100">
+       <h3 class="text-2xl font-bold mb-3">SafePath</h3>
+       <p class="mb-4 opacity-80">Real-time road safety application alerting users about accidents and hazards, reducing response time by 35%.</p>
+       <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 rounded-full text-sm font-medium">React</span> <span class="px-3 py-1 rounded-full text-sm font-medium">Node.js</span> <span class="px-3 py-1 rounded-full text-sm font-medium">WebSockets</span> <span class="px-3 py-1 rounded-full text-sm font-medium">MongoDB</span>
+       </div>
+       <p class="text-sm opacity-75">📍 GPS tracking • ⚡ Real-time alerts • 40% engagement boost</p>
+      </div>
+      <div class="project-card rounded-2xl p-8 shadow-lg fade-in-up delay-200">
+       <h3 class="text-2xl font-bold mb-3">CampusKart</h3>
+       <p class="mb-4 opacity-80">Full-stack campus marketplace enabling students to buy and sell items with real-time updates.</p>
+       <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 rounded-full text-sm font-medium">React</span> <span class="px-3 py-1 rounded-full text-sm font-medium">Express.js</span> <span class="px-3 py-1 rounded-full text-sm font-medium">MongoDB</span>
+       </div>
+       <p class="text-sm opacity-75">🏆 Patent Granted • 30% faster sync • 40% engagement increase</p>
+      </div>
+      <div class="project-card rounded-2xl p-8 shadow-lg fade-in-up delay-300">
+       <h3 class="text-2xl font-bold mb-3">VanOtech</h3>
+       <p class="mb-4 opacity-80">Smart college transport system with live tracking and instant seat booking capabilities.</p>
+       <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 rounded-full text-sm font-medium">MERN</span> <span class="px-3 py-1 rounded-full text-sm font-medium">Socket.io</span> <span class="px-3 py-1 rounded-full text-sm font-medium">Google Maps</span>
+       </div>
+       <p class="text-sm opacity-75">🚐 Live tracking • 40% improved accuracy • Enhanced safety</p>
+      </div>
+      <div class="project-card rounded-2xl p-8 shadow-lg fade-in-up delay-400">
+       <h3 class="text-2xl font-bold mb-3">SwasthFarm</h3>
+       <p class="mb-4 opacity-80">Farm management platform monitoring 10,000+ poultry birds with AI-powered health insights.</p>
+       <div class="flex flex-wrap gap-2 mb-4"><span class="px-3 py-1 rounded-full text-sm font-medium">JavaScript</span> <span class="px-3 py-1 rounded-full text-sm font-medium">Firebase</span> <span class="px-3 py-1 rounded-full text-sm font-medium">AI Chatbot</span>
+       </div>
+       <p class="text-sm opacity-75">🤖 AI guidance • 30% mortality reduction • Real-time alerts</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- Achievements Section -->
+   <section id="achievements" class="py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+     <h2 class="section-title text-4xl font-bold mb-12 text-center">Achievements</h2>
+     <div class="grid gap-6">
+      <div class="rounded-xl p-6 shadow-md slide-in-left delay-100">
+       <div class="flex items-start gap-4"><span class="text-4xl">🏆</span>
+        <div>
+         <h3 class="text-xl font-bold mb-2">Smart India Hackathon - 13th Position</h3>
+         <p class="opacity-80">Secured 13th among 500+ teams for innovative problem-solving and system design (2024)</p>
         </div>
-        <div class="space-y-4">
-         <div class="flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full" style="background: var(--accent-primary);"></div><span class="text-gray-300">Integrated Steel Production</span>
-         </div>
-         <div class="flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full" style="background: var(--accent-primary);"></div><span class="text-gray-300">Mining Operations</span>
-         </div>
-         <div class="flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full" style="background: var(--accent-primary);"></div><span class="text-gray-300">Infrastructure Development</span>
-         </div>
-         <div class="flex items-center gap-3">
-          <div class="w-2 h-2 rounded-full" style="background: var(--accent-primary);"></div><span class="text-gray-300">Sustainable Practices</span>
-         </div>
+       </div>
+      </div>
+      <div class="rounded-xl p-6 shadow-md slide-in-left delay-200">
+       <div class="flex items-start gap-4"><span class="text-4xl">📜</span>
+        <div>
+         <h3 class="text-xl font-bold mb-2">Patent Certificate - CampusKart</h3>
+         <p class="opacity-80">Granted patent for innovative campus marketplace platform with real-time features</p>
         </div>
        </div>
       </div>
-     </div>
-    </div>
-   </section><!-- Services Section -->
-   <section id="services" class="py-24 relative" style="background: linear-gradient(180deg, transparent, rgba(26, 26, 36, 0.5), transparent);">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="text-center mb-16 space-y-4"><span class="inline-block px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(232, 90, 44, 0.2); color: var(--accent-primary);"> Our Services </span>
-      <h2 class="text-4xl md:text-5xl font-bold" style="font-family: 'Playfair Display', serif;">Comprehensive <span class="gradient-text">Steel Solutions</span></h2>
-      <p class="text-gray-400 max-w-2xl mx-auto">From raw materials to finished products, we provide end-to-end steel manufacturing solutions.</p>
-     </div>
-     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"><!-- Service Card 1 -->
-      <div class="card rounded-3xl p-8 space-y-6">
-       <div class="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
-        <svg class="w-8 h-8" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l4.59-4.58L18 11l-6 6z" />
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold">Steel Manufacturing</h3>
-       <p class="text-gray-400">State-of-the-art integrated steel plants producing high-quality steel products for various industries.</p>
-      </div><!-- Service Card 2 -->
-      <div class="card rounded-3xl p-8 space-y-6">
-       <div class="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
-        <svg class="w-8 h-8" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold">Mining Operations</h3>
-       <p class="text-gray-400">Extensive mining operations across India and Africa, ensuring sustainable sourcing of raw materials.</p>
-      </div><!-- Service Card 3 -->
-      <div class="card rounded-3xl p-8 space-y-6">
-       <div class="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
-        <svg class="w-8 h-8" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M1 11v10h6v-5h2v5h6V11L8 6l-7 5zm12 8h-2v-5H5v5H3v-6.97l5-3.57 5 3.57V19zm4-12h2v2h-2zm0 4h2v2h-2zm0 4h2v2h-2z" />
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold">Infrastructure</h3>
-       <p class="text-gray-400">Building critical infrastructure projects that drive economic growth and development.</p>
-      </div><!-- Service Card 4 -->
-      <div class="card rounded-3xl p-8 space-y-6">
-       <div class="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
-        <svg class="w-8 h-8" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M17 20.41L18.41 19 15 15.59 13.59 17 17 20.41zM7.5 8H11v5.59L5.59 19 7 20.41l6-6V8h3.5L12 3.5 7.5 8z" />
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold">Power Generation</h3>
-       <p class="text-gray-400">Integrated power plants ensuring efficient and sustainable energy for our operations.</p>
-      </div><!-- Service Card 5 -->
-      <div class="card rounded-3xl p-8 space-y-6">
-       <div class="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
-        <svg class="w-8 h-8" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold">R&amp;D Innovation</h3>
-       <p class="text-gray-400">Continuous research and development to improve steel quality and manufacturing processes.</p>
-      </div><!-- Service Card 6 -->
-      <div class="card rounded-3xl p-8 space-y-6">
-       <div class="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
-        <svg class="w-8 h-8" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
-        </svg>
-       </div>
-       <h3 class="text-xl font-bold">Quality Assurance</h3>
-       <p class="text-gray-400">Rigorous quality control standards ensuring every product meets international specifications.</p>
-      </div>
-     </div>
-    </div>
-   </section><!-- Stats Section -->
-   <section id="stats" class="py-24 relative">
-    <div class="section-divider"></div>
-    <div class="max-w-7xl mx-auto px-6 py-16">
-     <div class="text-center mb-16 space-y-4"><span class="inline-block px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(232, 90, 44, 0.2); color: var(--accent-primary);"> Our Achievements </span>
-      <h2 class="text-4xl md:text-5xl font-bold" style="font-family: 'Playfair Display', serif;">Numbers That <span class="gradient-text">Speak</span></h2>
-     </div>
-     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="stat-card card rounded-2xl p-8 text-center">
-       <div class="text-5xl font-bold gradient-text mb-2">
-        10M+
-       </div>
-       <div class="text-gray-400 font-medium">
-        Tonnes Produced Annually
+      <div class="rounded-xl p-6 shadow-md slide-in-left delay-300">
+       <div class="flex items-start gap-4"><span class="text-4xl">🥇</span>
+        <div>
+         <h3 class="text-xl font-bold mb-2">Tech Expo Winner</h3>
+         <p class="opacity-80">1st place at College Technical Event for innovative technology solution</p>
+        </div>
        </div>
       </div>
-      <div class="stat-card card rounded-2xl p-8 text-center">
-       <div class="text-5xl font-bold gradient-text mb-2">
-        50K+
+      <div class="rounded-xl p-6 shadow-md slide-in-left delay-400">
+       <div class="flex items-start gap-4"><span class="text-4xl">🥉</span>
+        <div>
+         <h3 class="text-xl font-bold mb-2">Protech - 3rd &amp; 5th Position</h3>
+         <p class="opacity-80">Multiple podium finishes demonstrating strong technical and problem-solving excellence</p>
+        </div>
        </div>
-       <div class="text-gray-400 font-medium">
-        Employees Worldwide
-       </div>
-      </div>
-      <div class="stat-card card rounded-2xl p-8 text-center">
-       <div class="text-5xl font-bold gradient-text mb-2">
-        $15B+
-       </div>
-       <div class="text-gray-400 font-medium">
-        Annual Revenue
-       </div>
-      </div>
-      <div class="stat-card card rounded-2xl p-8 text-center">
-       <div class="text-5xl font-bold gradient-text mb-2">
-        100+
-       </div>
-       <div class="text-gray-400 font-medium">
-        Global Partners
-       </div>
-      </div>
-     </div>
-    </div>
-   </section><!-- Registration Section -->
-   <section id="register" class="py-24 relative" style="background: linear-gradient(180deg, transparent, rgba(26, 26, 36, 0.5));">
-    <div class="max-w-4xl mx-auto px-6">
-     <div class="text-center mb-12 space-y-4"><span class="inline-block px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(232, 90, 44, 0.2); color: var(--accent-primary);"> 🔥 Join Us Today </span>
-      <h2 class="text-4xl md:text-5xl font-bold" style="font-family: 'Playfair Display', serif;">Welcome to <span class="gradient-text">Jindal Steel</span></h2>
-      <p class="text-gray-400 text-lg max-w-2xl mx-auto">Register now to become part of India's leading integrated steel producer and unlock exclusive opportunities.</p>
-     </div><!-- Registration Form Card -->
-     <div class="card rounded-3xl p-8 md:p-12 max-w-2xl mx-auto animate-scale">
-      <div class="flex items-center justify-center mb-8">
-       <div class="w-20 h-20 rounded-2xl flex items-center justify-center animate-pulse-glow" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-        <svg viewbox="0 0 24 24" class="w-10 h-10" fill="white"><path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z" />
-        </svg>
-       </div>
-      </div>
-      <form id="registrationForm" class="space-y-6">
-       <div><label for="reg-email" class="block text-sm font-medium mb-2 flex items-center gap-2">
-         <svg class="w-4 h-4" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-         </svg> Email Address </label> <input type="email" id="reg-email" name="email" class="input-field w-full px-4 py-4 rounded-xl text-lg" placeholder="Enter your email address" required>
-       </div>
-       <div><label for="reg-id" class="block text-sm font-medium mb-2 flex items-center gap-2">
-         <svg class="w-4 h-4" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-         </svg> YOUR PASSWORD </label> <input type="text" id="reg-id" name="userId" class="input-field w-full px-4 py-4 rounded-xl text-lg" placeholder="Enter your Password" required>
-       </div><button type="submit" id="registerBtn" class="btn-primary w-full py-4 rounded-xl font-semibold text-white text-lg flex items-center justify-center gap-2 mt-8"> <span id="registerBtnText">Submit Registration</span>
-        <div id="registerSpinner" class="spinner hidden"></div>
-        <svg id="registerArrow" class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg></button>
-      </form>
-      <div class="mt-8 pt-8 border-t text-center" style="border-color: rgba(232, 90, 44, 0.2);">
-       <p class="text-gray-400 text-sm"></p>
       </div>
      </div>
     </div>
    </section><!-- Contact Section -->
-   <section id="contact" class="py-24 relative">
-    <div class="section-divider"></div>
-    <div class="max-w-7xl mx-auto px-6 py-16">
-     <div class="grid lg:grid-cols-2 gap-16">
-      <div class="space-y-8">
-       <div><span class="inline-block px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(232, 90, 44, 0.2); color: var(--accent-primary);"> Contact Us </span>
-       </div>
-       <h2 id="contact-title" class="text-4xl md:text-5xl font-bold" style="font-family: 'Playfair Display', serif;">Let's Build <span class="gradient-text">Together</span></h2>
-       <p class="text-gray-400 text-lg">Have questions or want to partner with us? Reach out and our team will get back to you within 24 hours.</p>
-       <div class="space-y-6">
-        <div class="flex items-center gap-4">
-         <div class="icon-container w-12 h-12 rounded-xl flex items-center justify-center">
-          <svg class="w-6 h-6" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-          </svg>
-         </div>
-         <div>
-          <div class="font-semibold">
-           Headquarters
-          </div>
-          <div class="text-gray-400">
-           New Delhi, India
-          </div>
-         </div>
-        </div>
-        <div class="flex items-center gap-4">
-         <div class="icon-container w-12 h-12 rounded-xl flex items-center justify-center">
-          <svg class="w-6 h-6" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-          </svg>
-         </div>
-         <div>
-          <div class="font-semibold">
-           Email
-          </div>
-          <div class="text-gray-400">
-           contact@jindalsteel.com
-          </div>
-         </div>
-        </div>
-        <div class="flex items-center gap-4">
-         <div class="icon-container w-12 h-12 rounded-xl flex items-center justify-center">
-          <svg class="w-6 h-6" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-          </svg>
-         </div>
-         <div>
-          <div class="font-semibold">
-           Phone
-          </div>
-          <div class="text-gray-400">
-           +91 11 2618 8345
-          </div>
-         </div>
-        </div>
-       </div>
-      </div><!-- Contact Form -->
-      <div class="card rounded-3xl p-8">
-       <form id="contactForm" class="space-y-6">
-        <div><label for="name" class="block text-sm font-medium mb-2">Full Name</label> <input type="text" id="name" name="name" class="input-field w-full px-4 py-3 rounded-xl" placeholder="Enter your name" required>
-        </div>
-        <div><label for="email" class="block text-sm font-medium mb-2">Email Address</label> <input type="email" id="email" name="email" class="input-field w-full px-4 py-3 rounded-xl" placeholder="Enter your email" required>
-        </div>
-        <div><label for="message" class="block text-sm font-medium mb-2">Message</label> <textarea id="message" name="message" rows="4" class="input-field w-full px-4 py-3 rounded-xl resize-none" placeholder="How can we help you?" required></textarea>
-        </div><button type="submit" id="submitBtn" class="btn-primary w-full py-4 rounded-xl font-semibold text-white flex items-center justify-center gap-2"> <span id="btnText">Send Message</span>
-         <div id="btnSpinner" class="spinner hidden"></div></button>
-       </form>
-      </div>
+   <section id="contact" class="py-20 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+     <h2 class="section-title text-4xl font-bold mb-8 inline-block">Get In Touch</h2>
+     <p id="contact-description" class="text-xl mb-12 opacity-80"></p>
+     <div class="flex flex-wrap justify-center gap-6 mb-12"><a id="contact-email" href="" class="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all"> <span>✉️</span> <span></span> </a> <a id="contact-phone" href="" class="flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all"> <span>📱</span> <span></span> </a>
+     </div>
+     <div class="flex justify-center gap-6"><a id="contact-linkedin" href="" target="_blank" rel="noopener noreferrer" class="text-3xl transition-transform hover:scale-110">💼</a> <a id="contact-github" href="" target="_blank" rel="noopener noreferrer" class="text-3xl transition-transform hover:scale-110">👨‍💻</a> <a id="contact-portfolio" href="" target="_blank" rel="noopener noreferrer" class="text-3xl transition-transform hover:scale-110">🌐</a>
      </div>
     </div>
    </section><!-- Footer -->
-   <footer class="py-12 border-t" style="border-color: rgba(232, 90, 44, 0.2);">
-    <div class="max-w-7xl mx-auto px-6">
-     <div class="grid md:grid-cols-4 gap-8 mb-12">
-      <div class="space-y-4">
-       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));">
-         <svg viewbox="0 0 24 24" class="w-6 h-6" fill="white"><path d="M12 2L2 7v10l10 5 10-5V7L12 2z" />
-         </svg>
-        </div><span class="text-lg font-bold">JINDAL STEEL</span>
-       </div>
-       <p class="text-gray-400 text-sm">Building the future of steel, one innovation at a time.</p>
-      </div>
-      <div>
-       <h4 class="font-semibold mb-4">Quick Links</h4>
-       <ul class="space-y-2 text-gray-400 text-sm">
-        <li><a href="#home" class="hover:text-white transition-colors">Home</a></li>
-        <li><a href="#about" class="hover:text-white transition-colors">About Us</a></li>
-        <li><a href="#services" class="hover:text-white transition-colors">Services</a></li>
-        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
-       </ul>
-      </div>
-      <div>
-       <h4 class="font-semibold mb-4">Industries</h4>
-       <ul class="space-y-2 text-gray-400 text-sm">
-        <li>Construction</li>
-        <li>Automotive</li>
-        <li>Infrastructure</li>
-        <li>Energy</li>
-       </ul>
-      </div>
-      <div>
-       <h4 class="font-semibold mb-4">Connect</h4>
-       <div class="flex gap-4"><a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110" style="background: rgba(232, 90, 44, 0.2);">
-         <svg class="w-5 h-5" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z" />
-         </svg></a> <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110" style="background: rgba(232, 90, 44, 0.2);">
-         <svg class="w-5 h-5" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-         </svg></a> <a href="#" class="w-10 h-10 rounded-full flex items-center justify-center transition-all hover:scale-110" style="background: rgba(232, 90, 44, 0.2);">
-         <svg class="w-5 h-5" fill="var(--accent-primary)" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-         </svg></a>
-       </div>
-      </div>
-     </div>
-     <div class="section-divider mb-8"></div>
-     <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
-      <p>© 2025 Jindal Steel Ltd. All rights reserved.</p>
-      <div class="flex gap-6"><a href="#" class="hover:text-white transition-colors">Privacy Policy</a> <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
-      </div>
-     </div>
-    </div>
-   </footer><!-- Toast Notification -->
-   <div id="toast" class="toast"></div>
+   <footer id="footer" class="py-8 text-center border-t">
+    <p id="footer-text" class="opacity-75"></p>
+   </footer>
   </div>
   <script>
-        // Default configuration
-        const defaultConfig = {
-            hero_title: 'Forging the <span class="gradient-text glow-text">Future</span> of Steel',
-            hero_subtitle: "One of India's leading integrated steel producers, operating under the O.P. Jindal Group with significant operations across India and Africa.",
-            about_title: 'Building India\'s <span class="gradient-text">Industrial Future</span>',
-            contact_title: 'Let\'s Build <span class="gradient-text">Together</span>',
-            background_color: '#0a0a0f',
-            surface_color: '#1a1a24',
-            text_color: '#f5f5f7',
-            primary_action: '#e85a2c',
-            secondary_action: '#ff8c5a'
-        };
+    const defaultConfig = {
+      background_color: '#0f172a',
+      surface_color: '#1e293b',
+      text_color: '#f1f5f9',
+      primary_action_color: '#3b82f6',
+      secondary_action_color: '#64748b',
+      full_name: 'Siddhartha Singh',
+      tagline: 'Full Stack Developer & Problem Solver',
+      about_description: 'B.Tech CSE student passionate about building innovative solutions. Experienced in MERN stack, real-time systems, and creating impactful applications.',
+      email: '6387siddhartha@gmail.com',
+      phone: '+91 9335692970',
+      linkedin_url: 'https://linkedin.com/in/siddhartha-singh-3939s',
+      github_url: 'https://github.com/Siddhartha39',
+      portfolio_url: '#',
+      font_family: 'Inter',
+      font_size: 16
+    };
 
-        let config = { ...defaultConfig };
-        let currentRecordCount = 0;
+    async function onConfigChange(config) {
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryColor = config.primary_action_color || defaultConfig.primary_action_color;
+      const secondaryColor = config.secondary_action_color || defaultConfig.secondary_action_color;
+      const customFont = config.font_family || defaultConfig.font_family;
+      const baseSize = config.font_size || defaultConfig.font_size;
+      const baseFontStack = `-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
 
-        // Toast notification function
-        function showToast(message, isError = false) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast' + (isError ? ' error' : '');
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
-        }
+      // Apply colors
+      document.getElementById('app-container').style.backgroundColor = backgroundColor;
+      document.getElementById('app-container').style.color = textColor;
+      
+      document.getElementById('navbar').style.backgroundColor = `${surfaceColor}cc`;
+      document.getElementById('navbar').style.borderColor = `${textColor}20`;
+      
+      document.getElementById('hero').style.backgroundColor = backgroundColor;
+      document.getElementById('education').style.backgroundColor = surfaceColor;
+      document.getElementById('skills').style.backgroundColor = backgroundColor;
+      document.getElementById('projects').style.backgroundColor = surfaceColor;
+      document.getElementById('achievements').style.backgroundColor = backgroundColor;
+      document.getElementById('contact').style.backgroundColor = surfaceColor;
+      document.getElementById('footer').style.backgroundColor = backgroundColor;
+      document.getElementById('footer').style.borderColor = `${textColor}20`;
 
-        // Data Handler for Data SDK
-        const dataHandler = {
-            onDataChanged(data) {
-                currentRecordCount = data.length;
-            }
-        };
+      document.getElementById('education-card').style.backgroundColor = backgroundColor;
+      document.getElementById('profile-glow').style.backgroundColor = primaryColor;
+      document.getElementById('profile-image').style.borderColor = primaryColor;
 
-        // Initialize Data SDK
-        async function initDataSdk() {
-            if (window.dataSdk) {
-                const result = await window.dataSdk.init(dataHandler);
-                if (!result.isOk) {
-                    console.error('Failed to initialize Data SDK');
-                }
-            }
-        }
+      // Nav links
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.style.color = textColor;
+        link.style.setProperty('--hover-color', primaryColor);
+      });
+      
+      const navLinkStyles = document.createElement('style');
+      navLinkStyles.textContent = `.nav-link::after { background-color: ${primaryColor}; }`;
+      document.head.appendChild(navLinkStyles);
 
-        // Handle form submission
-        async function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const btnSpinner = document.getElementById('btnSpinner');
+      // Buttons
+      document.getElementById('hero-linkedin-btn').style.backgroundColor = primaryColor;
+      document.getElementById('hero-linkedin-btn').style.color = '#ffffff';
+      document.getElementById('hero-github-btn').style.borderColor = primaryColor;
+      document.getElementById('hero-github-btn').style.color = primaryColor;
+      
+      document.getElementById('contact-email').style.backgroundColor = primaryColor;
+      document.getElementById('contact-email').style.color = '#ffffff';
+      document.getElementById('contact-phone').style.backgroundColor = surfaceColor;
+      document.getElementById('contact-phone').style.color = textColor;
+      document.getElementById('contact-phone').style.border = `2px solid ${secondaryColor}`;
 
-            if (!name || !email || !message) {
-                showToast('Please fill in all fields', true);
-                return;
-            }
+      // Section titles
+      const sectionTitleStyles = document.createElement('style');
+      sectionTitleStyles.textContent = `.section-title::after { background-color: ${primaryColor}; }`;
+      document.head.appendChild(sectionTitleStyles);
 
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showToast('Please enter a valid email address', true);
-                return;
-            }
+      // Skills tags
+      const skillTags = document.querySelectorAll('.skill-tag');
+      skillTags.forEach(tag => {
+        tag.style.backgroundColor = `${primaryColor}33`;
+        tag.style.color = primaryColor;
+      });
 
-            // Check data limit
-            if (currentRecordCount >= 999) {
-                showToast('Maximum submissions reached. Please try again later.', true);
-                return;
-            }
-
-            // Show loading state
-            submitBtn.disabled = true;
-            btnText.textContent = 'Sending...';
-            btnSpinner.classList.remove('hidden');
-
-            try {
-                if (window.dataSdk) {
-                    const result = await window.dataSdk.create({
-                        name: name,
-                        email: email,
-                        message: message,
-                        submittedAt: new Date().toISOString()
-                    });
-
-                    if (result.isOk) {
-                        document.getElementById('contactForm').reset();
-                        showToast('✓ Message sent successfully! We\'ll get back to you soon.');
-                    } else {
-                        showToast('Failed to send message. Please try again.', true);
-                    }
-                } else {
-                    // Fallback if SDK not available
-                    document.getElementById('contactForm').reset();
-                    showToast('✓ Message received! We\'ll get back to you soon.');
-                }
-            } catch (error) {
-                showToast('An error occurred. Please try again.', true);
-            } finally {
-                submitBtn.disabled = false;
-                btnText.textContent = 'Send Message';
-                btnSpinner.classList.add('hidden');
-            }
-        }
-
-        // Config change handler
-        async function onConfigChange(newConfig) {
-            config = { ...defaultConfig, ...newConfig };
-            
-            // Update hero section
-            const heroTitle = document.getElementById('hero-title');
-            const heroSubtitle = document.getElementById('hero-subtitle');
-            const aboutTitle = document.getElementById('about-title');
-            const contactTitle = document.getElementById('contact-title');
-
-            if (heroTitle) heroTitle.innerHTML = config.hero_title || defaultConfig.hero_title;
-            if (heroSubtitle) heroSubtitle.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-            if (aboutTitle) aboutTitle.innerHTML = config.about_title || defaultConfig.about_title;
-            if (contactTitle) contactTitle.innerHTML = config.contact_title || defaultConfig.contact_title;
-
-            // Update colors
-            document.documentElement.style.setProperty('--primary-bg', config.background_color);
-            document.documentElement.style.setProperty('--surface', config.surface_color);
-            document.documentElement.style.setProperty('--text', config.text_color);
-            document.documentElement.style.setProperty('--accent-primary', config.primary_action);
-            document.documentElement.style.setProperty('--accent-secondary', config.secondary_action);
-        }
-
-        // Map to capabilities
-        function mapToCapabilities(config) {
-            return {
-                recolorables: [
-                    {
-                        get: () => config.background_color || defaultConfig.background_color,
-                        set: (value) => {
-                            config.background_color = value;
-                            window.elementSdk.setConfig({ background_color: value });
-                        }
-                    },
-                    {
-                        get: () => config.surface_color || defaultConfig.surface_color,
-                        set: (value) => {
-                            config.surface_color = value;
-                            window.elementSdk.setConfig({ surface_color: value });
-                        }
-                    },
-                    {
-                        get: () => config.text_color || defaultConfig.text_color,
-                        set: (value) => {
-                            config.text_color = value;
-                            window.elementSdk.setConfig({ text_color: value });
-                        }
-                    },
-                    {
-                        get: () => config.primary_action || defaultConfig.primary_action,
-                        set: (value) => {
-                            config.primary_action = value;
-                            window.elementSdk.setConfig({ primary_action: value });
-                        }
-                    },
-                    {
-                        get: () => config.secondary_action || defaultConfig.secondary_action,
-                        set: (value) => {
-                            config.secondary_action = value;
-                            window.elementSdk.setConfig({ secondary_action: value });
-                        }
-                    }
-                ],
-                borderables: [],
-                fontEditable: undefined,
-                fontSizeable: undefined
-            };
-        }
-
-        // Map to edit panel values
-        function mapToEditPanelValues(config) {
-            return new Map([
-                ['hero_title', (config.hero_title || defaultConfig.hero_title).replace(/<[^>]*>/g, '')],
-                ['hero_subtitle', config.hero_subtitle || defaultConfig.hero_subtitle],
-                ['about_title', (config.about_title || defaultConfig.about_title).replace(/<[^>]*>/g, '')],
-                ['contact_title', (config.contact_title || defaultConfig.contact_title).replace(/<[^>]*>/g, '')]
-            ]);
-        }
-
-        // Initialize Element SDK
-        if (window.elementSdk) {
-            window.elementSdk.init({
-                defaultConfig,
-                onConfigChange,
-                mapToCapabilities,
-                mapToEditPanelValues
-            });
-        }
-
-        // Initialize Data SDK
-        initDataSdk();
-
-        // Form event listener
-        document.getElementById('contactForm').addEventListener('submit', handleFormSubmit);
-
-        // Registration form handler
-        document.getElementById('registrationForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('reg-email').value.trim();
-            const userId = document.getElementById('reg-id').value.trim();
-            const registerBtn = document.getElementById('registerBtn');
-            const registerBtnText = document.getElementById('registerBtnText');
-            const registerSpinner = document.getElementById('registerSpinner');
-            const registerArrow = document.getElementById('registerArrow');
-
-            // Validation
-            if (!email || !userId) {
-                showToast('Please fill in all fields', true);
-                return;
-            }
-
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showToast('Please enter a valid email address', true);
-                return;
-            }
-
-            // Show loading state
-            registerBtn.disabled = true;
-            registerBtnText.textContent = 'Submitting...';
-            registerSpinner.classList.remove('hidden');
-            registerArrow.classList.add('hidden');
-
-            try {
-                // Save to Firebase
-                if (window.firebaseDb) {
-                    const newUserRef = window.firebasePush(window.firebaseRef(window.firebaseDb, 'users'));
-                    await window.firebaseSet(newUserRef, {
-                        email: email,
-                        userId: userId,
-                        registeredAt: new Date().toISOString(),
-                        id: newUserRef.key
-                    });
-
-                    document.getElementById('registrationForm').reset();
-                    showToast('✓ Registration successful! Your data has been saved.');
-                } else {
-                    showToast('Firebase connection error. Please try again.', true);
-                }
-            } catch (error) {
-                console.error('Error saving data:', error);
-                showToast('Error: ' + error.message, true);
-            } finally {
-                registerBtn.disabled = false;
-                registerBtnText.textContent = 'Submit Registration';
-                registerSpinner.classList.add('hidden');
-                registerArrow.classList.remove('hidden');
-            }
+      // Project cards
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach(card => {
+        card.style.backgroundColor = backgroundColor;
+        card.style.boxShadow = `0 10px 40px ${textColor}10`;
+        const tags = card.querySelectorAll('span');
+        tags.forEach(tag => {
+          if (tag.classList.contains('skill-tag')) return;
+          tag.style.backgroundColor = `${secondaryColor}33`;
+          tag.style.color = secondaryColor;
         });
+      });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('open');
-        });
+      // Achievement cards
+      const achievementCards = document.querySelectorAll('#achievements .rounded-xl');
+      achievementCards.forEach(card => {
+        card.style.backgroundColor = backgroundColor;
+        card.style.boxShadow = `0 4px 12px ${textColor}10`;
+      });
 
-        // Close mobile menu when clicking links
-        document.querySelectorAll('.mobile-nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-            });
-        });
+      // Apply fonts
+      document.getElementById('app-container').style.fontFamily = `${customFont}, ${baseFontStack}`;
+      
+      // Font sizes
+      document.getElementById('nav-name').style.fontSize = `${baseSize * 1.5}px`;
+      document.querySelectorAll('.nav-link').forEach(el => el.style.fontSize = `${baseSize}px`);
+      
+      document.getElementById('hero-greeting').style.fontSize = `${baseSize * 1.125}px`;
+      document.getElementById('hero-name').style.fontSize = `${baseSize * 3.75}px`;
+      document.getElementById('hero-tagline').style.fontSize = `${baseSize * 1.5}px`;
+      document.getElementById('hero-description').style.fontSize = `${baseSize * 1.125}px`;
+      
+      document.querySelectorAll('.section-title').forEach(el => el.style.fontSize = `${baseSize * 2.5}px`);
+      document.querySelectorAll('h3').forEach(el => el.style.fontSize = `${baseSize * 1.5}px`);
+      document.querySelectorAll('p').forEach(el => el.style.fontSize = `${baseSize}px`);
+      document.querySelectorAll('.skill-tag').forEach(el => el.style.fontSize = `${baseSize * 0.875}px`);
 
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        const appWrapper = document.getElementById('app-wrapper');
-        
-        appWrapper.addEventListener('scroll', () => {
-            if (appWrapper.scrollTop > 50) {
-                navbar.style.background = 'rgba(10, 10, 15, 0.95)';
-                navbar.style.backdropFilter = 'blur(10px)';
-                navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
-            } else {
-                navbar.style.background = 'transparent';
-                navbar.style.backdropFilter = 'none';
-                navbar.style.boxShadow = 'none';
+      // Apply text content
+      const fullName = config.full_name || defaultConfig.full_name;
+      const tagline = config.tagline || defaultConfig.tagline;
+      const aboutDesc = config.about_description || defaultConfig.about_description;
+      const email = config.email || defaultConfig.email;
+      const phone = config.phone || defaultConfig.phone;
+      const linkedinUrl = config.linkedin_url || defaultConfig.linkedin_url;
+      const githubUrl = config.github_url || defaultConfig.github_url;
+      const portfolioUrl = config.portfolio_url || defaultConfig.portfolio_url;
+
+      document.getElementById('nav-name').textContent = fullName;
+      document.getElementById('hero-name').textContent = fullName;
+      document.getElementById('hero-tagline').textContent = tagline;
+      document.getElementById('hero-description').textContent = aboutDesc;
+      
+      document.getElementById('hero-linkedin-btn').href = linkedinUrl;
+      document.getElementById('hero-github-btn').href = githubUrl;
+      
+      document.getElementById('contact-description').textContent = `Feel free to reach out for collaborations or just a friendly chat!`;
+      
+      document.getElementById('contact-email').href = `mailto:${email}`;
+      document.getElementById('contact-email').querySelector('span:last-child').textContent = email;
+      
+      document.getElementById('contact-phone').href = `tel:${phone}`;
+      document.getElementById('contact-phone').querySelector('span:last-child').textContent = phone;
+      
+      document.getElementById('contact-linkedin').href = linkedinUrl;
+      document.getElementById('contact-github').href = githubUrl;
+      document.getElementById('contact-portfolio').href = portfolioUrl;
+      
+      document.getElementById('footer-text').textContent = `© 2025 ${fullName}. Built with passion and code.`;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
             }
-        });
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_action_color || defaultConfig.secondary_action_color,
+            set: (value) => {
+              config.secondary_action_color = value;
+              window.elementSdk.setConfig({ secondary_action_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      };
+    }
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['full_name', config.full_name || defaultConfig.full_name],
+        ['tagline', config.tagline || defaultConfig.tagline],
+        ['about_description', config.about_description || defaultConfig.about_description],
+        ['email', config.email || defaultConfig.email],
+        ['phone', config.phone || defaultConfig.phone],
+        ['linkedin_url', config.linkedin_url || defaultConfig.linkedin_url],
+        ['github_url', config.github_url || defaultConfig.github_url],
+        ['portfolio_url', config.portfolio_url || defaultConfig.portfolio_url]
+      ]);
+    }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements with animation classes
-        document.querySelectorAll('.animate-fade-up, .animate-fade-left, .animate-fade-right, .animate-scale').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c1ef1a8a4b58fac',t:'MTc2OTA4Mzc4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b0cbba004a36eef',t:'MTc2NjIwODQ3MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
