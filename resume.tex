@@ -1,0 +1,215 @@
+%-------------------------
+% Resume in Latex
+% Author : Siddhartha Singh
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\setlength{\multicolsep}{-3.0pt}
+\setlength{\columnsep}{-1pt}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.6in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.19in}
+\addtolength{\topmargin}{-0.75in} % Increased top margin slightly
+\addtolength{\textheight}{1.65in} % Increased text height to strictly force 1 page
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textbf{\small #2} \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\collegeItem}[1]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small } \\
+    \end{tabular*}\vspace{-4pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & \textbf{\small #2}\\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemiii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+{\Huge \scshape Siddhartha Singh} \\[3pt]
+
+{\small
+\href{tel:+916387598633}{\textcolor{Blue}{\faPhone~+91 9335692970}} \quad
+\href{mailto:6387siddhartha@gmail.com}{\textcolor{Blue}{\faEnvelope~\underline{6387siddhartha@gmail.com}}} \quad
+\href{https://www.linkedin.com/in/siddhartha-singh-3939s}{\textcolor{Blue}{\faLinkedin~\underline{linkedin/siddhartha-singh-3939s}}} \quad
+\href{https://github.com/Siddhartha39}{\textcolor{Blue}{\faGithub~\underline{github/Siddhartha39}}} \quad
+\href{https://siddharthaportfolio3939.vercel.app/}{\textcolor{Blue}{\faGlobe~\underline{Portfolio}}}
+}
+\end{center}
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Pranveer Singh Institute of Technology Kanpur}{Sep 2024 -- Jul 2028}
+      {Bachelor of Technology in Computer Science Engineering}{Kanpur, Uttar Pradesh}
+  
+  \resumeSubHeadingListEnd
+  \vspace{-13pt}
+  
+%-----------SKILLS-----------
+\vspace{2pt}
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}] 
+    \small{\item{
+     \textbf{Languages: }{C, C++, JavaScript, Python, HTML} \\
+     \textbf{Libraries/Frameworks: }{C++ STL, React.js, Node.js, Express.js, Socket.IO, Mongoose, Tailwind CSS} \\
+     \textbf{Databases: }{MongoDB, MySQL, Firebase} \\
+     \textbf{Tools/Platforms: }{Git, GitHub, VS Code, Google Cloud, Postman, Google OAuth 2.0, Docker, Render, Netlify} \\
+     \textbf{Relevant Coursework: }{Data structures, Algorithms, OOPs, DBMS, Operating System, Computer Network}
+    }}
+ \end{itemize}
+ \vspace{-16pt}
+
+%-----------EXPERIENCE-----------
+\vspace{2pt}
+\section{Experience}
+  \resumeSubHeadingListStart
+    
+    \resumeSubheading
+      {Freelance Web Developer}{Jan 2026 -- Present}
+      {Renuvia Recycling \href{https://renuviarecycling.com/}{\textcolor{Blue}{\faGlobe}} $|$ Galaxy Computers \& Services}{Remote}
+      \resumeItemListStart
+        \resumeItem{\textbf{Renuvia Recycling:} Developed the official responsive website using modern frontend frameworks, optimizing UI components for fast loading speeds and enhanced user engagement.}
+        \resumeItem{\textbf{Galaxy Computers \& Services:} Engineered a fully functional e-commerce platform with an optimized product catalog to enable secure online browsing and customer transactions.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+  \vspace{-14pt}
+
+%-----------PROJECTS-----------
+\vspace{2pt}
+\section{Projects}
+\vspace{-8pt}
+\resumeSubHeadingListStart
+\resumeProjectHeading
+{\textbf{\href{https://github.com/Siddhartha39/Safepath}{Safepath}} 
+$|$ \emph{React, Node.js, Express.js, MongoDB, WebSockets, GPS} 
+$|$ \emph{Real-Time Safety Application}}{}
+\vspace{-6pt}
+\resumeItemListStart
+\resumeItem{Designed and developed a real-time road safety application to alert users about accidents and hazardous road conditions, aiming to reduce on-road incidents.}
+\resumeItem{Implemented live hazard reporting via \textbf{WebSockets} and GPS tracking, optimizing MongoDB queries to reduce response times by \textbf{35\%} and increase engagement by \textbf{40\%}.}
+\resumeItemListEnd
+\vspace{-10pt}
+
+\resumeProjectHeading
+{\textbf{\href{https://github.com/Siddhartha39/campuskart}{CampusKart}} $|$ \emph{React, Node.js, Express.js, MongoDB, WebSockets} $|$ \emph{\color{Blue}\href{https://campuskart.store/}\faGlobe\hspace{4pt}}\href{https://github.com/Siddhartha39/campuskart}{\textcolor{Blue}{\faGithub}}}{ }
+\vspace{-6pt}
+\resumeItemListStart
+\resumeItem{Developed a comprehensive campus hub integrating a peer-to-peer marketplace with social networking features including image posts, real-time chat, comments, and sharing.}
+\resumeItem{Engineered dedicated portals for students to discover and share internships, placements, campus events, and hackathons in a centralized feed.}
+\resumeItem{Integrated \textbf{WebSockets} for instant updates across users and optimized MongoDB queries, improving data retrieval speeds and boosting platform engagement by \textbf{40\%}.}
+\resumeItemListEnd
+\vspace{-10pt}
+
+\resumeProjectHeading
+{\textbf{\href{https://github.com/Siddhartha39/VanOtech}{VanOtech – Smart College Transport System}} 
+$|$ \emph{JavaScript, MERN Stack, Socket.io, GPS, Google Maps API} 
+$|$ \emph{\color{Blue}\href{https://github.com/Siddhartha39/VanOtech}{\faGithub}}}{ }
+\vspace{-6pt}
+\resumeItemListStart
+\resumeItem{Developed a \textbf{smart college transportation platform} featuring live van tracking and notifications using \textbf{Socket.io} and GPS integration, improving arrival accuracy by \textbf{40\%}.}
+\resumeItem{Built a secure student–driver communication system and optimized backend APIs to enhance transport safety, reliability, and overall operational efficiency.}
+\resumeItemListEnd
+\vspace{-10pt}
+
+\resumeProjectHeading
+{\textbf{\href{https://github.com/Siddhartha39/SwasthFarm}{SwasthFarm}} $|$ \emph{HTML, CSS, JavaScript, Firebase, AI Chatbot, WeatherAPI} $|$ \emph{\color{Blue}\href{https://swasthfarm.netlify.app/}\faGlobe\hspace{4pt}}\href{https://github.com/Siddhartha39/SwasthFarm}{\textcolor{Blue}{\faGithub}}}{ }
+\vspace{-6pt}
+\resumeItemListStart
+\resumeItem{Developed a farm management web app to monitor \textbf{10,000+ poultry birds}, reducing mortality risk by \textbf{30\%} through predictive \textbf{WeatherAPI} alerts and tracking.}
+\resumeItem{Integrated an \textbf{AI-powered chatbot} to guide farmers on biosecurity practices and automate query handling, enhancing user engagement.}
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-14pt}
+
+%-----------ACHIEVEMENTS---------------
+\vspace{2pt}
+\section{Achievements}
+\resumeSubHeadingListStart
+  \resumeItemListStart
+
+    \resumeItem{Secured \textbf{13\textsuperscript{th} position among 500+ teams} in the \textbf{Smart India Hackathon (Internal Round)}. \hfill 2025}
+
+    \resumeItem{Granted a \textbf{Patent Certificate} for \textbf{CampusKart}, a full-stack campus marketplace platform. \href{https://ibb.co/Q3wggwDK}{\textcolor{Blue}{\faAward}}}
+
+    \resumeItem{Winner of \textbf{Tech Expo} for developing an innovative technology solution. \href{https://erp.psit.ac.in/Document/Verify/PSITKNP28012557}{\textcolor{Blue}{\faAward}}}
+
+    \resumeItem{Achieved \textbf{3\textsuperscript{rd}} and \textbf{5\textsuperscript{th} position} in \textbf{Protech}, demonstrating strong technical problem-solving skills. \href{https://erp.psit.ac.in/Document/Verify/PSITKNP23062514}{\textcolor{Blue}{\faAward}}}
+
+  \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+\end{document}
