@@ -7,11 +7,12 @@ import { useMediaQuery } from "react-responsive";
 import { easing } from "maath";
 import { Suspense } from "react";
 import Loader from "../components/Loader";
+import ScrollDownIcon from "../components/ScrollDownIcon";
 
 const Hero = () => {
   const isMobile = useMediaQuery({ maxWidth: 853 });
   return (
-    <section className="flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space">
+    <section className="flex items-start justify-center min-h-screen overflow-hidden md:items-start md:justify-start c-space relative">
       <HeroText />
       <ParallaxBackground />
       <figure
@@ -30,6 +31,7 @@ const Hero = () => {
           </Suspense>
         </Canvas>
       </figure>
+      <ScrollDownIcon />
     </section>
   );
 };
